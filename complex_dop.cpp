@@ -2,13 +2,13 @@
 #include <iostream>
 #include <sstream>
 
-// Конструктор для не комплексного числа
+// ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г° Г¤Г«Гї Г­ГҐ ГЄГ®Г¬ГЇГ«ГҐГЄГ±Г­Г®ГЈГ® Г·ГЁГ±Г«Г 
 Complex::Complex(const double real) : Complex(real, 0.0) 
 {
 
 }
 
-// Конструктор для комплексного числа
+// ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г° Г¤Г«Гї ГЄГ®Г¬ГЇГ«ГҐГЄГ±Г­Г®ГЈГ® Г·ГЁГ±Г«Г 
 Complex::Complex(const double real, const double imaginary) : re(real), im(imaginary) 
 {
 
