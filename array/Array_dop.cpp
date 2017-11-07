@@ -3,7 +3,7 @@
 #include <sstream>
 using namespace std;
 
-Array::~Array() // Деструктор
+Array::~Array() // Г„ГҐГ±ГІГ°ГіГЄГІГ®Г°
 {
 	delete[] massiv;
 	massiv = nullptr;
@@ -11,7 +11,7 @@ Array::~Array() // Деструктор
 	size = 0;
 }
 
-Array::Array(const int & q1) // Создание массива
+Array::Array(const int & q1) // Г‘Г®Г§Г¤Г Г­ГЁГҐ Г¬Г Г±Г±ГЁГўГ 
 {
 	massiv = new int[q1];
 	for (int i = 0; i < q1; i++)
@@ -22,7 +22,7 @@ Array::Array(const int & q1) // Создание массива
 	capacity = q1;
 }
 
-int & Array::operator[](const ptrdiff_t q1) // Вызов элемента массива
+int & Array::operator[](const ptrdiff_t q1) // Г‚Г»Г§Г®Гў ГЅГ«ГҐГ¬ГҐГ­ГІГ  Г¬Г Г±Г±ГЁГўГ 
 {
 	if (q1 < 0 || q1 >= size)
 	{
@@ -34,12 +34,12 @@ int & Array::operator[](const ptrdiff_t q1) // Вызов элемента массива
 	}
 }
 
-int Array::Size() const // Получение размера массива
+int Array::Size() const // ГЏГ®Г«ГіГ·ГҐГ­ГЁГҐ Г°Г Г§Г¬ГҐГ°Г  Г¬Г Г±Г±ГЁГўГ 
 {
 	return size;
 }
 
-void Array::add() // Добавление пустого элемента в массив
+void Array::add() // Г„Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ ГЇГіГ±ГІГ®ГЈГ® ГЅГ«ГҐГ¬ГҐГ­ГІГ  Гў Г¬Г Г±Г±ГЁГў
 {
 	if (size < capacity)
 	{
@@ -58,7 +58,7 @@ void Array::add() // Добавление пустого элемента в массив
 	}
 }
 
-void Array::insert(const int & q1, const int & q2) // Вставка элемента в массив
+void Array::insert(const int & q1, const int & q2) // Г‚Г±ГІГ ГўГЄГ  ГЅГ«ГҐГ¬ГҐГ­ГІГ  Гў Г¬Г Г±Г±ГЁГў
 {
 	if (q2 < 0 || q2 >= size)
 	{
