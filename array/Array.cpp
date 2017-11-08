@@ -12,10 +12,12 @@ int main()
 		cout << q1[i] << " ";
 	}
 	cout << endl;
+	q1.add();
 	q1.write_to();
-	q1.insert(60, 5);
+	q1.insert(60, 9);
 	q1.write_to();
-	//q1.insert_massiv(a, 2);
-	//q1.write_to();
+
+	q1.insert_massiv(a, 2);
+	q1.write_to();
 	
 }
