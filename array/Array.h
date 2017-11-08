@@ -1,34 +1,33 @@
 #ifndef Programmka
 #define Programmka
 #include <iosfwd>
-#include <string>
 
 struct Array
 {
 public:
-	Array() = default; // Êîíñòðóêòîð ïî óìîë÷àíèþ
+	Array() = default; // Конструктор по умолчанию
 
-	~Array(); // Ïåðåîïðåäåëÿåì äåñòðóêòîð
+	~Array(); // Переопределяем деструктор
 
-	Array(const int& q1); // Ñîçäàíèå ìàññèâà ñ çàäàííûì ðàçìåðîì
+	Array(const int& q1); // Создание массива с заданным размером
 
-	int& operator[] (const ptrdiff_t q1); // Ïîëó÷åíèå çíà÷åíèÿ i-íîãî ýëåìåíòà
+	int& operator[] (const ptrdiff_t q1); // Получение значения i-ного элемента
 
-	int Size() const; // Ïîëó÷åíèå çíà÷åíèÿ ïîëÿ size
+	int Size() const; // Получение значения поля size
 
-	void insert(const int& q1, const int& q2); // Âñòàâêà ÷èñëà â ìàññèâ
+	void insert(const int& q1, const int& q2); // Вставка числа в массив
 
 	//void insert_massiv(const int q1[], const int q2); // Äîáàâëåíèå ìàññèâà â ìàññèâ
 
-	void write_to(); // Âûâîä ìàññèâà íà ýêðàí
+	void write_to(); // Вывод массива на экран
 private:
-	ptrdiff_t capacity{ 0 }; // Âìåñòèìîñòü ìàññèâà
+	ptrdiff_t capacity{ 0 }; // Вместимость массива
 
-	ptrdiff_t size{ 0 }; // Òåêóùèé ðàçìåð ìàññèâà
+	ptrdiff_t size{ 0 }; // Текущий размер массива
 
-	int* massiv{ nullptr }; // Ñàì ìàññèâ
+	int* massiv{ nullptr }; // Сам массив
 
-	void add(); // Äîáàâëÿåò ïóñòîé ýëåìåíò â êîíåö ìàññèâà
+	void add(); // Добавляет пустой элемент в конец массива
 };
 
 
