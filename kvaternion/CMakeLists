@@ -1,0 +1,1 @@
+add_executable ( Kvaternion.cpp Kvaternion.h Kvaternion_dop.cpp )
