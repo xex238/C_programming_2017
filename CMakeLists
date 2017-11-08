@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 3.0)
+
+project( novitskiy_d_a )
+
+add_subdirectory( array )
+add_subdirectory( complex )
+add_subdirectory( kvaternion )
+add_subdirectory( vec_3d )
+add_subdirectory( vec_3dT )
