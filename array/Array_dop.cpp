@@ -1,9 +1,8 @@
 #include "Array.h"
 #include <iostream>
-#include <sstream>
 using namespace std;
 
-Array::~Array() // Äåñòðóêòîð
+Array::~Array() // Конструктор
 {
 	delete[] massiv;
 	massiv = nullptr;
@@ -11,7 +10,7 @@ Array::~Array() // Äåñòðóêòîð
 	size = 0;
 }
 
-Array::Array(const int & q1) // Ñîçäàíèå ìàññèâà
+Array::Array(const int & q1) // Создание массива
 {
 	massiv = new int[q1];
 	for (int i = 0; i < q1; i++)
@@ -22,7 +21,7 @@ Array::Array(const int & q1) // Ñîçäàíèå ìàññèâà
 	capacity = q1;
 }
 
-int & Array::operator[](const ptrdiff_t q1) // Âûçîâ ýëåìåíòà ìàññèâà
+int & Array::operator[](const ptrdiff_t q1) // Вызов элемента массива
 {
 	if (q1 < 0 || q1 >= size)
 	{
@@ -34,12 +33,12 @@ int & Array::operator[](const ptrdiff_t q1) // Âûçîâ ýëåìåíòà ìà�
 	}
 }
 
-int Array::Size() const // Ïîëó÷åíèå ðàçìåðà ìàññèâà
+int Array::Size() const // Получение размера массива
 {
 	return size;
 }
 
-void Array::add() // Äîáàâëåíèå ïóñòîãî ýëåìåíòà â ìàññèâ
+void Array::add() // Добавление пустого элемента в массив
 {
 	if (size < capacity)
 	{
@@ -58,7 +57,7 @@ void Array::add() // Äîáàâëåíèå ïóñòîãî ýëåìåíòà â ì�
 	}
 }
 
-void Array::insert(const int & q1, const int & q2) // Âñòàâêà ýëåìåíòà â ìàññèâ
+void Array::insert(const int & q1, const int & q2) // Вставка элемента в массив
 {
 	if (q2 < 0 || q2 >= size)
 	{
@@ -101,7 +100,7 @@ void Array::insert(const int & q1, const int & q2) // Âñòàâêà ýëåìå�
 //	}
 //}
 
-void Array::write_to()
+void Array::write_to() // Вывод масива на экран
 {
 	for (int i = 0; i < size; i++)
 	{
