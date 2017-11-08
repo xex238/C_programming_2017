@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-Array::~Array() // Конструктор
+Array::~Array() // Деструктор
 {
 	delete[] massiv;
 	massiv = nullptr;
@@ -12,13 +12,22 @@ Array::~Array() // Конструктор
 
 Array::Array(const int & q1) // Создание массива
 {
-	massiv = new int[q1];
-	for (int i = 0; i < q1; i++)
+	int x = 1;
+	while (x < q1)
+	{
+		x *= 2;
+	}
+	massiv = new int[x];
+	for (int i = 0; i < x; i++)
+	{
+		massiv[i] = 0;
+	}
+	for (int i = x; i < q1; i++)
 	{
 		massiv[i] = 0;
 	}
 	size = q1;
-	capacity = q1;
+	capacity = x;
 }
 
 int & Array::operator[](const ptrdiff_t q1) // Вызов элемента массива
@@ -51,6 +60,10 @@ void Array::add() // Добавление пустого элемента в м�
 		{
 			new_massiv[i] = massiv[i];
 		}
+		for (int i = size; i < capacity * 2; i++)
+		{
+			new_massiv[i] = 0;
+		}
 		size++;
 		capacity = capacity * 2;
 		std::swap(massiv, new_massiv);
@@ -74,31 +87,31 @@ void Array::insert(const int & q1, const int & q2) // Вставка элеме�
 	}
 }
 
-//void Array::insert_massiv(const int q1[], const int q2)
-//{
-//	int a = sizeof(q1);
-//	int m = 0;
-//	if (q2 < 0 || q2 >= size)
-//	{
-//		throw new exception;
-//	}
-//	else
-//	{
-//		for (int i = 0; i < a; i++)
-//		{
-//			add();
-//		}
-//		for (int i = size - 1; i < q2; i--)
-//		{
-//			massiv[size + 1] = massiv[size - a];
-//		}
-//		for (int i = q2; i < q2 + a; i++)
-//		{
-//			massiv[i] = q1[m];
-//			m++;
-//		}
-//	}
-//}
+void Array::insert_massiv(const int q1[], const int q2)
+{
+	int a = sizeof(q1);
+	int m = 0;
+	if (q2 < 0 || q2 >= size)
+	{
+		throw new exception;
+	}
+	else
+	{
+		for (int i = 0; i < a; i++)
+		{
+			add();
+		}
+		for (int i = size - 1; i < q2; i--)
+		{
+			massiv[size + 1] = massiv[size - a];
+		}
+		for (int i = q2; i < q2 + a; i++)
+		{
+			massiv[i] = q1[m];
+			m++;
+		}
+	}
+}
 
 void Array::write_to() // Вывод масива на экран
 {
