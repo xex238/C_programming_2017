@@ -17,17 +17,17 @@ public:
 
 	void insert(const int& q1, const int& q2); // Вставка числа в массив
 
-	//void insert_massiv(const int q1[], const int q2); // Äîáàâëåíèå ìàññèâà â ìàññèâ
+	void insert_massiv(const int q1[], const int q2); // Добавление массива в массив
 
 	void write_to(); // Вывод массива на экран
+
+	void add(); // Добавляет пустой элемент в конец массива
 private:
 	ptrdiff_t capacity{ 0 }; // Вместимость массива
 
 	ptrdiff_t size{ 0 }; // Текущий размер массива
 
 	int* massiv{ nullptr }; // Сам массив
-
-	void add(); // Добавляет пустой элемент в конец массива
 };
 
 
