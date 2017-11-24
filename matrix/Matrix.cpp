@@ -53,7 +53,7 @@ Matrix::Matrix(int n_Rows, int n_Columns)
 			}
 		}
 	}
-	else throw new exception("Невверно введены границы массива!");
+	else throw new exception("ГЌГҐГўГўГҐГ°Г­Г® ГўГўГҐГ¤ГҐГ­Г» ГЈГ°Г Г­ГЁГ¶Г» Г¬Г Г±Г±ГЁГўГ !");
 }
 
 Matrix::Matrix(int ** mat, int n_Rows, int n_Columns)
@@ -64,7 +64,7 @@ Matrix::Matrix(int ** mat, int n_Rows, int n_Columns)
 		this->n_Columns = n_Columns;
 		matrix = mat;
 	}
-	else throw new exception("Невверно введены границы массива!");
+	else throw new exception("ГЌГҐГўГўГҐГ°Г­Г® ГўГўГҐГ¤ГҐГ­Г» ГЈГ°Г Г­ГЁГ¶Г» Г¬Г Г±Г±ГЁГўГ !");
 }
 
 void Matrix::Add(int mass[], ptrdiff_t n_Columns)
@@ -77,7 +77,7 @@ void Matrix::Add(int mass[], ptrdiff_t n_Columns)
 		}
 		matrix[n_Columns] = mass;
 	}
-	else throw new exception("Неверно введены границы массива!");
+	else throw new exception("ГЌГҐГўГҐГ°Г­Г® ГўГўГҐГ¤ГҐГ­Г» ГЈГ°Г Г­ГЁГ¶Г» Г¬Г Г±Г±ГЁГўГ !");
 }
 
 Matrix& Matrix::operator+=(const Matrix & q1)
@@ -92,7 +92,7 @@ Matrix& Matrix::operator+=(const Matrix & q1)
 			}
 		}
 	}
-	else throw new exception("Невозможно выполнить сложение");
+	else throw new exception("ГЌГҐГўГ®Г§Г¬Г®Г¦Г­Г® ГўГ»ГЇГ®Г«Г­ГЁГІГј Г±Г«Г®Г¦ГҐГ­ГЁГҐ");
 	return *this;
 }
 
@@ -108,7 +108,7 @@ Matrix & Matrix::operator-=(const Matrix & q1)
 			}
 		}
 	}
-	else throw new exception("Невозможно выполнить вычитание");
+	else throw new exception("ГЌГҐГўГ®Г§Г¬Г®Г¦Г­Г® ГўГ»ГЇГ®Г«Г­ГЁГІГј ГўГ»Г·ГЁГІГ Г­ГЁГҐ");
 	return *this;
 }
 
@@ -130,7 +130,7 @@ Matrix & Matrix::operator*=(const Matrix & q1)
 			}
 		}
 	}
-	else throw new exception("Невозможно выполнить умножение");
+	else throw new exception("ГЌГҐГўГ®Г§Г¬Г®Г¦Г­Г® ГўГ»ГЇГ®Г«Г­ГЁГІГј ГіГ¬Г­Г®Г¦ГҐГ­ГЁГҐ");
 	return *this;
 }
 
