@@ -1,1 +1,1 @@
-add_executable(  )
+add_executable( Matrix.cpp Matrix.h Matrix_main.cpp )
