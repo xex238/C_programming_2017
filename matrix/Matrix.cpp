@@ -53,7 +53,7 @@ Matrix::Matrix(int n_Rows, int n_Columns)
 			}
 		}
 	}
-	else throw new exception("Íåââåðíî ââåäåíû ãðàíèöû ìàññèâà!");
+	else throw new exception("Невверно введены границы массива!");
 }
 
 Matrix::Matrix(int ** mat, int n_Rows, int n_Columns)
@@ -64,7 +64,7 @@ Matrix::Matrix(int ** mat, int n_Rows, int n_Columns)
 		this->n_Columns = n_Columns;
 		matrix = mat;
 	}
-	else throw new exception("Íåââåðíî ââåäåíû ãðàíèöû ìàññèâà!");
+	else throw new exception("Невверно введены границы массива!");
 }
 
 void Matrix::Add(int mass[], ptrdiff_t n_Columns)
@@ -77,7 +77,7 @@ void Matrix::Add(int mass[], ptrdiff_t n_Columns)
 		}
 		matrix[n_Columns] = mass;
 	}
-	else throw new exception("Íåâåðíî ââåäåíû ãðàíèöû ìàññèâà!");
+	else throw new exception("Невверно введены границы массива!");
 }
 
 Matrix& Matrix::operator+=(const Matrix & q1)
@@ -92,7 +92,7 @@ Matrix& Matrix::operator+=(const Matrix & q1)
 			}
 		}
 	}
-	else throw new exception("Íåâîçìîæíî âûïîëíèòü ñëîæåíèå");
+	else throw new exception("Невозможно выполнить сложение");
 	return *this;
 }
 
@@ -108,7 +108,7 @@ Matrix & Matrix::operator-=(const Matrix & q1)
 			}
 		}
 	}
-	else throw new exception("Íåâîçìîæíî âûïîëíèòü âû÷èòàíèå");
+	else throw new exception("Невозможно выполнить вычитание");
 	return *this;
 }
 
@@ -130,7 +130,7 @@ Matrix & Matrix::operator*=(const Matrix & q1)
 			}
 		}
 	}
-	else throw new exception("Íåâîçìîæíî âûïîëíèòü óìíîæåíèå");
+	else throw new exception("Невозможно выполнить умножение");
 	return *this;
 }
 
