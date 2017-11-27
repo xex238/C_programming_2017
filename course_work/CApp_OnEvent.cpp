@@ -1,4 +1,4 @@
-#include "CApp.h" // Обработка событий
+#include "CApp.h" // РћР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёР№
 
 void CApp::OnEvent(SDL_Event* Event) 
 {
