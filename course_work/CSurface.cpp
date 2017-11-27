@@ -5,7 +5,7 @@ CSurface::CSurface()
 
 }
 
-SDL_Surface* CSurface::OnLoad(char* File) // Загрузка картинки
+SDL_Surface* CSurface::OnLoad(char* File) // Р—Р°РіСЂСѓР·РєР° РєР°СЂС‚РёРЅРєРё
 {
 	SDL_Surface* Surf_Temp = NULL;
 	SDL_Surface* Surf_Return = NULL;
@@ -21,7 +21,7 @@ SDL_Surface* CSurface::OnLoad(char* File) // Загрузка картинки
 	return Surf_Return;
 }
 
-bool CSurface::OnDraw(SDL_Surface* Surf_Dest, SDL_Surface* Surf_Src, int X, int Y) // Рисование целой картинки
+bool CSurface::OnDraw(SDL_Surface* Surf_Dest, SDL_Surface* Surf_Src, int X, int Y) // Р РёСЃРѕРІР°РЅРёРµ С†РµР»РѕР№ РєР°СЂС‚РёРЅРєРё
 {
 	if (Surf_Dest == NULL || Surf_Src == NULL)
 	{
@@ -38,7 +38,7 @@ bool CSurface::OnDraw(SDL_Surface* Surf_Dest, SDL_Surface* Surf_Src, int X, int 
 	return true;
 }
 
-bool CSurface::OnDraw(SDL_Surface* Surf_Dest, SDL_Surface* Surf_Src, int X, int Y, int X2, int Y2, int W, int H) // Рисование части картинки
+bool CSurface::OnDraw(SDL_Surface* Surf_Dest, SDL_Surface* Surf_Src, int X, int Y, int X2, int Y2, int W, int H) // Р РёСЃРѕРІР°РЅРёРµ С‡Р°СЃС‚Рё РєР°СЂС‚РёРЅРєРё
 {
 	if (Surf_Dest == NULL || Surf_Src == NULL) 
 	{
