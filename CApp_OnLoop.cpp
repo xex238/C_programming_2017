@@ -1,4 +1,4 @@
-#include "CApp.h" // Игровой цикл
+#include "CApp.h" // РРіСЂРѕРІРѕР№ С†РёРєР»
 
 void CApp::OnLoop()
 {
