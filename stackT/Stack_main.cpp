@@ -3,32 +3,49 @@
 #include <string>
 using namespace std;
 
-int main()
+template<typename T>
+void Test_parse(Stack<T>& q1, const T q2[], const int q3)
 {
-	Stack<int> q1;
-	q1.push(228);
-	for (int i = 0; i < 10; i++)
+	cout << "Test_parse is start..." << endl;
+	if ((q3 < 0) || (q3 == 0))
 	{
-		q1.push(i);
+		throw invalid_argument("Введите верное значение переменной q3");
 	}
-	q1.push(2018);
-
+	for (int i = 0; i < q3; i++)
+	{
+		q1.push(q2[i]);
+	}
 	while (!q1.isEmpty())
 	{
 		cout << q1.top() << " ";
 		q1.pop();
 	}
-	cout << endl;
+	cout << endl << "Test_parse is end." << endl;
+}
+
+int main()
+{
+	Stack<int> q1;
+	const int x1[12] = { 228, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 2018 };
+	const int y1 = -1;
+	try
+	{
+		Test_parse(q1, x1, y1);
+	}
+	catch (invalid_argument)
+	{
+		cout << "The method is suspended! Invalid value of the variable q3!" << endl;
+	}
 
 	Stack<string> q2;
-	q2.push("It's easy"); 
-	q2.push("Why did you create this??");
-	q2.push("What is that?");
-
-	while (!q2.isEmpty())
+	string x2[3] = { "It's so easy", "Why did you create this??", "What is that?" };
+	const int y2 = 3;
+	try
 	{
-		cout << q2.top() << endl;
-		q2.pop();
+		Test_parse(q2, x2, y2);
 	}
-	cout << endl;
+	catch (invalid_argument)
+	{
+		cout << "The method is suspended! Invalid value of the variable q3!" << endl;
+	}
 }
