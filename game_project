@@ -1,0 +1,121 @@
+#include <SFML/Graphics.hpp>
+using namespace sf;
+
+const int H = 12;
+const int W = 30;
+
+String Title_map[H] =
+{
+	"NNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+	"NJ                          N",
+	"N  J                        N",
+	"N    J                      N",
+	"N      J                    N",
+	"N        J                  N",
+	"N          J                N",
+	"N            J              N",
+	"N              J            N",
+	"N                J          N",
+	"N                  J        N",
+	"NNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+};
+
+int main()
+{
+	RenderWindow window(VideoMode(1000, 600), "New_Window"); // Создаём новое окошечко
+	CircleShape shape(100.f);
+	shape.setFillColor(Color::Green);
+
+	Texture t;
+	t.loadFromFile("C:/Users/Дмитрий/Downloads/car_3_right.png");
+	t.create(100, 100);
+
+	Sprite s;
+	s.setTexture(t);
+	s.setPosition(50, 100);
+	window.draw(s);
+
+	Clock clock;
+
+	RectangleShape rectangle;
+	Vector2f vec;
+	vec.x = 10;
+	vec.y = 10;
+	rectangle.setSize(vec);
+
+	FloatRect rect;
+	rect = FloatRect(0, 0, 40, 50);
+
+	while (window.isOpen())
+	{
+		float time = clock.getElapsedTime().asMicroseconds();
+		clock.restart();
+		time = time / 800;
+
+		Event event;
+		while (window.pollEvent(event))
+		{
+			if ((event.type == Event::Closed) || (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape))
+				window.close();
+		}
+
+		if (Keyboard::isKeyPressed(Keyboard::Left))
+		{
+			t.loadFromFile("C:/Users/Дмитрий/Downloads/car_3_left.png");
+			s.setTexture(t);
+			window.draw(s);
+			s.move(-0.1*time, 0);
+		}
+
+		if (Keyboard::isKeyPressed(Keyboard::Down))
+		{
+			t.loadFromFile("C:/Users/Дмитрий/Downloads/car_3_down.png");
+			s.setTexture(t);
+			window.draw(s);
+			s.move(0, 0.1*time);
+		}
+
+		if (Keyboard::isKeyPressed(Keyboard::Up))
+		{
+			t.loadFromFile("C:/Users/Дмитрий/Downloads/car_3_up.png");
+			s.setTexture(t);
+			window.draw(s);
+			s.move(0, -0.1*time);
+		}
+
+		if (Keyboard::isKeyPressed(Keyboard::Right))
+		{
+			t.loadFromFile("C:/Users/Дмитрий/Downloads/car_3_right.png");
+			s.setTexture(t);
+			window.draw(s);
+			s.move(0.1*time, 0);
+		}
+
+		window.clear();
+
+		for (int i = 0; i < H; i++)
+		{
+			for (int j = 0; j < W; j++)
+			{
+				if (Title_map[i][j] == 'J')
+				{
+					rectangle.setFillColor(Color::Green);
+				}
+				else if (Title_map[i][j] == 'N')
+				{
+					rectangle.setFillColor(Color::Blue);
+				}
+				else if (Title_map[i][j] = ' ')
+				{
+					continue;
+				}
+				rectangle.setPosition(j * 32, i * 32);
+				window.draw(rectangle);
+			}
+		}
+
+		window.draw(s);
+
+		window.display();
+	}
+}
