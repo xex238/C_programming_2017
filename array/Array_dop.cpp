@@ -2,12 +2,19 @@
 #include <iostream>
 using namespace std;
 
+Array::Array()
+{
+	capacity = 2;
+	massiv = new int[capacity];
+	size = 0;
+}
+
 Array::~Array() // Деструктор
 {
 	delete[] massiv;
 	massiv = nullptr;
-	capacity = 0;
-	size = 0;
+	capacity = ptrdiff_t{ 0 };
+	size = ptrdiff_t{ 0 };
 }
 
 Array::Array(const int & q1) // Создание массива
@@ -34,7 +41,7 @@ int & Array::operator[](const ptrdiff_t q1) // Вызов элемента ма�
 {
 	if (q1 < 0 || q1 >= size)
 	{
-		throw new std::exception;
+		throw new std::exception ("Out of range exception!");
 	}
 	else
 	{
@@ -49,25 +56,18 @@ int Array::Size() const // Получение размера массива
 
 void Array::add() // Добавление пустого элемента в массив
 {
-	if (size < capacity)
-	{
-		size++;
-	}
-	else
+	if (size > capacity)
 	{
 		int* new_massiv = new int[capacity * 2];
 		for (int i = 0; i < size; i++)
 		{
 			new_massiv[i] = massiv[i];
 		}
-		for (int i = size; i < capacity * 2; i++)
-		{
-			new_massiv[i] = 0;
-		}
-		size++;
-		capacity = capacity * 2;
+		capacity *= 2;
 		std::swap(massiv, new_massiv);
+		delete[] new_massiv;
 	}
+	size++;
 }
 
 void Array::insert(const int & q1, const int & q2) // Вставка элемента в массив
@@ -121,4 +121,3 @@ void Array::write_to() // Вывод масива на экран
 	}
 	cout << endl;
 }
-
