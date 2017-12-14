@@ -1,34 +1,36 @@
 #ifndef Programmka
 #define Programmka
+
 #include <iosfwd>
 
 struct Array
 {
 public:
-	Array() = default; // Конструктор по умолчанию
+	Array();
 
-	~Array(); // Переопределяем деструктор
+	~Array();
 
-	Array(const int& q1); // Создание массива с заданным размером
+	Array(const int& q1);
 
-	int& operator[] (const ptrdiff_t q1); // Получение значения i-ного элемента
+	int& operator[] (const ptrdiff_t q1);
 
-	int Size() const; // Получение значения поля size
+	int Size() const;
 
-	void insert(const int& q1, const int& q2); // Вставка числа в массив
+	void insert(const int& q1, const int& q2);
 
-	void insert_massiv(const int q1[], const int q2); // Добавление массива в массив
+	void insert_massiv(const int q1[], const int q2);
 
-	void write_to(); // Вывод массива на экран
+	void write_to();
 
-	void add(); // Добавляет пустой элемент в конец массива
+	void add();
+
 private:
-	ptrdiff_t capacity{ 0 }; // Вместимость массива
 
-	ptrdiff_t size{ 0 }; // Текущий размер массива
+	ptrdiff_t capacity{ 0 };
 
-	int* massiv{ nullptr }; // Сам массив
+	ptrdiff_t size{ 0 };
+
+	int* massiv{ nullptr };
 };
-
 
 #endif // !Programmka
