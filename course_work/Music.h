@@ -1,7 +1,7 @@
 #include <SFML\Audio.hpp>
 using namespace sf;
-#ifndef The_best_music
-#define The_best_music
+#ifndef Musics_
+#define Musics_
 
 class Musics
 {
