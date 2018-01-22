@@ -1,15 +1,11 @@
 #include "Map.h"
-#include "Arrow.h"
-#include <SFML\Graphics.hpp>
-#include <iostream>
-using namespace sf;
 
-Map::Map(const String& string_for_load_map_texture, const String& string_for_load_arrows_texture) // <- Стандартный конструктор
+Map::Map() // <- Стандартный конструктор
 {
-	map_texture.loadFromFile(string_for_load_map_texture);
+	map_texture.loadFromFile("pictures/sprite_list_textures.png");
 	map_sprite.setTexture(map_texture);
 
-	arrows_texture.loadFromFile(string_for_load_arrows_texture);
+	arrows_texture.loadFromFile("pictures/sprite_list_arrows.png");
 	arrows_sprite.setTexture(arrows_texture);
 
 	for (int i = 0; i < H; i++) // <- Проходимся по высоте (строки)
