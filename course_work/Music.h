@@ -1,4 +1,3 @@
-#include <SFML/Graphics.hpp>
 #include <SFML\Audio.hpp>
 using namespace sf;
 #ifndef The_best_music
@@ -7,9 +6,7 @@ using namespace sf;
 class Musics
 {
 public:
-	Musics() = default;
-
-	Musics(const String& s_SoundBuffer, const String& s_Music);
+	Musics();
 
 	~Musics() = default;
 
@@ -35,4 +32,3 @@ private:
 };
 
 #endif // !Music
-
