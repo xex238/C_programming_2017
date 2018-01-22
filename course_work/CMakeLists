@@ -1,1 +1,1 @@
-add_executable ( Player.h Player.cpp Music.h Music.cpp Menu.h Menu.cpp Map.h Map.cpp main.cpp Car.h Car.cpp )
+add_executable ( Car.h Car.cpp Player.h Player.cpp Music.h Music.cpp Menu.h Menu.cpp Map.h Map.cpp main.cpp )
