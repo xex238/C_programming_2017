@@ -1,24 +1,22 @@
 #include "Menu.h"
-#include <SFML\Graphics.hpp>
-using namespace sf;
 
-Menu::Menu(const String& main, const String& left, const String& settings, const String& rectangle, const String& string_for_restart_level) // <- Стандартный конструктор
+Menu::Menu()
 {
-	restart_level_texture.loadFromFile(string_for_restart_level);
+	restart_level_texture.loadFromFile("pictures/restart_level.png");
 	restart_level_sprite.setTexture(restart_level_texture);
 	restart_level_sprite.setPosition(64, 0);
 
-	main_texture.loadFromFile(main);
+	main_texture.loadFromFile("pictures/main_menu.png");
 	main_sprite.setTexture(main_texture);
 
-	left_texture.loadFromFile(left);
+	left_texture.loadFromFile("pictures/arrow_back.png");
 	left_sprite.setTexture(left_texture);
 	left_sprite.setPosition(0, 0);
 
-	settings_texture.loadFromFile(settings);
+	settings_texture.loadFromFile("pictures/settings.png");
 	settings_sprite.setTexture(settings_texture);
 
-	rectangle_texture.loadFromFile(rectangle);
+	rectangle_texture.loadFromFile("pictures/rectangle.png");
 	rectangle_sprite.setTexture(rectangle_texture);
 
 	sounds_enable_list_texture.loadFromFile("pictures/sprite_list_sign_of_the_volume_1.png");
@@ -42,7 +40,7 @@ Menu::Menu(const String& main, const String& left, const String& settings, const
 	text.setString(txt_1);
 }
 
-void Menu::Menu_MouseButtonReleased_left(RenderWindow & window) // <- Если отпущена кнопка в меню
+void Menu::Menu_MouseButtonReleased_left(RenderWindow & window, Vector2f pos) // <- Если отпущена кнопка в меню
 {
 	if ((pos.x > 500) && (pos.x < 750) && (pos.y > 130) && (pos.y < 190))
 	{
@@ -59,7 +57,7 @@ void Menu::Menu_MouseButtonReleased_left(RenderWindow & window) // <- Если �
 	enable_rectangle_sprite = false;
 }
 
-void Menu::Menu_MouseButtonPressed_left(const RenderWindow& window) // <- Если нажата кнопка в меню
+void Menu::Menu_MouseButtonPressed_left(const RenderWindow& window, Vector2f pos) // <- Если нажата кнопка в меню
 {
 	if ((pos.x > 500) && (pos.x < 750) && (pos.y > 130) && (pos.y < 190))
 	{
@@ -85,16 +83,16 @@ void Menu::Menu_MouseButtonPressed_left(const RenderWindow& window) // <- Есл
 	}
 }
 
-void Menu::Menu_MouseButtonEvent(RenderWindow& window, const Event& event) // <- Нажата ли кнопка или отпущена
+void Menu::Menu_MouseButtonEvent(RenderWindow& window, const Event& event, Vector2f pos) // <- Нажата ли кнопка или отпущена
 {
-	Menu_MouseButtonPressed_left(window);
+	Menu_MouseButtonPressed_left(window, pos);
 	if ((event.type == Event::MouseButtonReleased) && (event.key.code == Mouse::Left))
 	{
-		Menu_MouseButtonReleased_left(window);
+		Menu_MouseButtonReleased_left(window, pos);
 	}
 }
 
-void Menu::Work_with_settings(const Event& event, Musics& my_music) // <- Работа с громкостью звука в настройках
+void Menu::Work_with_settings(const Event& event, Musics& my_music, Vector2f pos) // <- Работа с громкостью звука в настройках
 {
 	int text_int_settings[3]{ 0, 0, 0 };
 	std::string txt = "";  // третья цифра тут - первая на консоли // 48 is number 0, 49 is number 1, 53 is number 5
@@ -201,7 +199,7 @@ void Menu::Work_with_settings(const Event& event, Musics& my_music) // <- Раб
 	}
 }
 
-void Menu::Return_to_main_menu(const Event& event)
+void Menu::Return_to_main_menu(const Event& event, Vector2f pos)
 {
 	if (event.type == Event::MouseButtonReleased)
 	{
@@ -215,13 +213,7 @@ void Menu::Return_to_main_menu(const Event& event)
 	}
 }
 
-void Menu::Update_pos(const RenderWindow& window) // <- Обновление позиции мыши на экране
-{
-	pixel_pos = Mouse::getPosition(window);
-	pos = window.mapPixelToCoords(pixel_pos);
-}
-
-void Menu::Restart_level(const Event& event, Player& car, Map& map_1, Musics& my_music) // <- Перезагрузка уровня
+void Menu::Restart_level(const Event& event, Car& car, Map& map_1, Musics& my_music, Vector2f pos) // <- Перезагрузка уровня
 {
 	if (event.type == Event::MouseButtonPressed)
 	{
