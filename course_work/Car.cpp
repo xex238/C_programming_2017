@@ -1,6 +1,6 @@
 #include "Car.h"
 
-Car::Car(Map& map_1) // <- Ñòàíäàðòíûé êîíñòðóêòîð
+Car::Car(Map& map_1) // <- Ð¡Ñ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚Ð½Ñ‹Ð¹ ÐºÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€
 {
 	x = map_1.Return_burn().x + 64 + 5;
 	y = map_1.Return_burn().y + 128 + 5;
@@ -56,7 +56,7 @@ Car::Car(Map& map_1) // <- Ñòàíäàðòíûé êîíñòðóêòîð
 	text_for_win.setPosition(320, 0);
 }
 
-void Car::Move_control(Vector2f pos) // <- Âûáîð äâèæåíèÿ ìàøèíêè èëè îáðàáîòêà ïåðåäâèæåíèÿ ñòðåëî÷êè
+void Car::Move_control(Vector2f pos) // <- Ð’Ñ‹Ð±Ð¾Ñ€ Ð´Ð²Ð¸Ð¶ÐµÐ½Ð¸Ñ Ð¼Ð°ÑˆÐ¸Ð½ÐºÐ¸ Ð¸Ð»Ð¸ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° Ð¿ÐµÑ€ÐµÐ´Ð²Ð¸Ð¶ÐµÐ½Ð¸Ñ ÑÑ‚Ñ€ÐµÐ»Ð¾Ñ‡ÐºÐ¸
 {
 	if (arrow_is_move)
 	{
@@ -165,18 +165,18 @@ void Car::Go_with_time(const int& vector)
 	}
 }
 
-void Car::Player_MouseButtonPressed(const Event& event, Vector2f pos) // <- Îáðàáîòêà ïåðåäâèæåíèÿ ñòðåëî÷êè
+void Car::Player_MouseButtonPressed(const Event& event, Vector2f pos) // <- ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° Ð¿ÐµÑ€ÐµÐ´Ð²Ð¸Ð¶ÐµÐ½Ð¸Ñ ÑÑ‚Ñ€ÐµÐ»Ð¾Ñ‡ÐºÐ¸
 {
 	if (event.type == Event::MouseButtonPressed)
 	{
 		if (event.key.code == Mouse::Left)
 		{
-			if ((arrow_is_move) && (arrows[number_of_move_arrow].getGlobalBounds().contains(pos.x, pos.y))) // <- Åñëè óæå äâèãàåì
+			if ((arrow_is_move) && (arrows[number_of_move_arrow].getGlobalBounds().contains(pos.x, pos.y))) // <- Ð•ÑÐ»Ð¸ ÑƒÐ¶Ðµ Ð´Ð²Ð¸Ð³Ð°ÐµÐ¼
 			{
 				dx_number_of_arrow = arrows[number_of_move_arrow].getPosition().x;
 				dy_number_of_arrow = arrows[number_of_move_arrow].getPosition().y;
 			}
-			else if ((!arrow_is_move) && (pos.x > 320) && (pos.y > 64) && (pos.x < 352) && (pos.y < 96)) // <- Åñëè íà èñõîäíûõ 4-¸õ ñòðåëî÷êàõ
+			else if ((!arrow_is_move) && (pos.x > 320) && (pos.y > 64) && (pos.x < 352) && (pos.y < 96)) // <- Ð•ÑÐ»Ð¸ Ð½Ð° Ð¸ÑÑ…Ð¾Ð´Ð½Ñ‹Ñ… 4-Ñ‘Ñ… ÑÑ‚Ñ€ÐµÐ»Ð¾Ñ‡ÐºÐ°Ñ…
 			{
 				vector_of_arrows_int = 1;
 				vector_arrows_string = '1';
@@ -220,9 +220,9 @@ void Car::Player_MouseButtonPressed(const Event& event, Vector2f pos) // <- Îáðà
 				arrows[number_of_move_arrow].setPosition(512, 64);
 				arrow_is_move = true;
 			}
-			else if ((!arrow_is_move)) // <- Åñëè óêàçàòåëü ìûøè íà ñîçäàííûõ ñòðåëî÷êàõ
+			else if ((!arrow_is_move)) // <- Ð•ÑÐ»Ð¸ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð¼Ñ‹ÑˆÐ¸ Ð½Ð° ÑÐ¾Ð·Ð´Ð°Ð½Ð½Ñ‹Ñ… ÑÑ‚Ñ€ÐµÐ»Ð¾Ñ‡ÐºÐ°Ñ…
 			{
-				for (int i = 0; i < size_arrows + 1; i++) // <- Ïðîâåðÿåì íàæàòèå íà i-ûé ñïðàéò
+				for (int i = 0; i < size_arrows + 1; i++) // <- ÐŸÑ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼ Ð½Ð°Ð¶Ð°Ñ‚Ð¸Ðµ Ð½Ð° i-Ñ‹Ð¹ ÑÐ¿Ñ€Ð°Ð¹Ñ‚
 				{
 					if (arrows[i].getGlobalBounds().contains(pos.x, pos.y))
 					{
@@ -236,17 +236,17 @@ void Car::Player_MouseButtonPressed(const Event& event, Vector2f pos) // <- Îáðà
 	}
 }
 
-void Car::Player_MouseButtonReleased(const Event& event, const Map& map_1, Vector2f pos) // <- Ïîñëå îòïóñêàíèÿ êíîïêè ìûøè, êîòîðàÿ òàùèëà ñòðåëî÷êó
+void Car::Player_MouseButtonReleased(const Event& event, const Map& map_1, Vector2f pos) // <- ÐŸÐ¾ÑÐ»Ðµ Ð¾Ñ‚Ð¿ÑƒÑÐºÐ°Ð½Ð¸Ñ ÐºÐ½Ð¾Ð¿ÐºÐ¸ Ð¼Ñ‹ÑˆÐ¸, ÐºÐ¾Ñ‚Ð¾Ñ€Ð°Ñ Ñ‚Ð°Ñ‰Ð¸Ð»Ð° ÑÑ‚Ñ€ÐµÐ»Ð¾Ñ‡ÐºÑƒ
 {
 	if (event.type == Event::MouseButtonReleased)
 	{
 		if (event.key.code == Mouse::Left)
 		{
-			if (arrow_is_move) // <- Äëÿ ñòðåëî÷êè
+			if (arrow_is_move) // <- Ð”Ð»Ñ ÑÑ‚Ñ€ÐµÐ»Ð¾Ñ‡ÐºÐ¸
 			{
 				if ((pos.x > 64) && (pos.y > 128) && (pos.x < (960 + 32)) && (pos.y < (384 + 96)) && (map_1.title_map_1[(int)(arrows[number_of_move_arrow].getPosition().y / 32 - 4)][(int)(arrows[number_of_move_arrow].getPosition().x / 32 - 2)] == 'J'))
 				{
-					for (int i = 0; i < size_arrows; i++)  // <- Åñëè íà ìåñòå óæå íàõîäèòñÿ ñòðåëî÷êà, âåðíóòü ñïðàéò â èñõîäíóþ ïîçèöèþ
+					for (int i = 0; i < size_arrows; i++)  // <- Ð•ÑÐ»Ð¸ Ð½Ð° Ð¼ÐµÑÑ‚Ðµ ÑƒÐ¶Ðµ Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ ÑÑ‚Ñ€ÐµÐ»Ð¾Ñ‡ÐºÐ°, Ð²ÐµÑ€Ð½ÑƒÑ‚ÑŒ ÑÐ¿Ñ€Ð°Ð¹Ñ‚ Ð² Ð¸ÑÑ…Ð¾Ð´Ð½ÑƒÑŽ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸ÑŽ
 					{
 						if (arrows[i].getGlobalBounds().contains(pos.x, pos.y))
 						{
@@ -280,14 +280,14 @@ void Car::Player_MouseButtonReleased(const Event& event, const Map& map_1, Vecto
 	}
 }
 
-void Car::Restart_time() // <- Îáíîâëåíèå âðåìåíè
+void Car::Restart_time() // <- ÐžÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 {
 	time = clock.getElapsedTime().asMicroseconds();
 	clock.restart();
 	time = time / 800;
 }
 
-void Car::Draw_arrows(RenderWindow& window) // <- Îòðèñîâêà ñòðåëî÷åê
+void Car::Draw_arrows(RenderWindow& window) // <- ÐžÑ‚Ñ€Ð¸ÑÐ¾Ð²ÐºÐ° ÑÑ‚Ñ€ÐµÐ»Ð¾Ñ‡ÐµÐº
 {
 	for (int i = 0; i < size_arrows + 1; i++)
 	{
@@ -295,7 +295,7 @@ void Car::Draw_arrows(RenderWindow& window) // <- Îòðèñîâêà ñòðåëî÷åê
 	}
 }
 
-void Car::Car_go(const Map& map_1, RenderWindow& window, Musics& my_music) // <- Àâòîìàòè÷åñêîå äâèæåíèå ìàøèíêè ê ôèíèøó
+void Car::Car_go(const Map& map_1, RenderWindow& window, Musics& my_music) // <- ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ Ð´Ð²Ð¸Ð¶ÐµÐ½Ð¸Ðµ Ð¼Ð°ÑˆÐ¸Ð½ÐºÐ¸ Ðº Ñ„Ð¸Ð½Ð¸ÑˆÑƒ
 {
 	int vector_was{ vector };
 
