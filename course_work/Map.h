@@ -2,9 +2,6 @@
 #define Map_
 #include <SFML/Graphics.hpp>
 using namespace sf;
-#include "Arrow.h"
-#include "Massiv_arrows.h"
-#include <string>
 
 class Map
 {
@@ -29,7 +26,7 @@ public:
 
 	~Map() = default;
 
-	Map(const String& string_for_load_map_texture, const String& string_for_load_arrows_texture);
+	Map();
 
 	void Draw_arrows(RenderWindow& window);
 
@@ -45,8 +42,8 @@ public:
 
 	Vector2i Return_burn();
 private:
-	const int H = 12;
-	const int W = 30;
+	const int H{ 12 };
+	const int W{ 30 };
 
 	int vector{ 0 };
 
