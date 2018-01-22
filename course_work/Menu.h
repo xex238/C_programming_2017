@@ -1,33 +1,27 @@
 #include <SFML/Graphics.hpp>
 #include "Map.h"
-#include "Player.h"
-#include "Music.h"
-using namespace sf;
+#include "Car.h"
 #ifndef Menu_
 #define Menu_
 
 class Menu
 {
 public:
-	Menu() = default;
-
-	Menu(const String& main, const String& left, const String& settings, const String& rectangle, const String& string_for_restart_level);
+	Menu();
 
 	~Menu() = default;
 
-	void Menu_MouseButtonReleased_left(RenderWindow& window);
+	void Menu_MouseButtonReleased_left(RenderWindow& window, Vector2f pos);
 
-	void Menu_MouseButtonPressed_left(const RenderWindow& window);
+	void Menu_MouseButtonPressed_left(const RenderWindow& window, Vector2f pos);
 
-	void Menu_MouseButtonEvent(RenderWindow& window, const Event& event);
+	void Menu_MouseButtonEvent(RenderWindow& window, const Event& event, Vector2f pos);
 
-	void Work_with_settings(const Event& event, Musics& my_music);
+	void Work_with_settings(const Event& event, Musics& my_music, Vector2f pos);
 
-	void Return_to_main_menu(const Event& event);
+	void Return_to_main_menu(const Event& event, Vector2f pos);
 
-	void Update_pos(const RenderWindow& window);
-
-	void Restart_level(const Event& event, Player& car, Map&  map_1, Musics& my_music);
+	void Restart_level(const Event& event, Car& car, Map&  map_1, Musics& my_music, Vector2f pos);
 
 	Text Return_text();
 
@@ -66,11 +60,6 @@ private:
 	Texture sounds_enable_list_texture; // <- Текстурка значка включенного/выключенного звука
 	Sprite sounds_enable_list_sprite;
 	bool sounds_enable = true; // <- Включен или выключен звук
-
-	Event event;
-
-	Vector2i pixel_pos; // <- Координаты мыши в пикселях
-	Vector2f pos; // <- Координаты мыши
 
 	Font font;  // <- Шрифт для текста
 	Text text = Text("", font, 20); // <- Сам текст
