@@ -1,13 +1,10 @@
 #include "Music.h"
-#include <SFML\Audio.hpp>
-#include <SFML/Graphics.hpp>
-using namespace sf;
 
-Musics::Musics(const String& s_SoundBuffer, const String& s_Music) // <- Стандартный конструктор
+Musics::Musics()
 {
-	game_over_music.openFromFile(s_SoundBuffer);
+	game_over_music.openFromFile("music/game_over.ogg");
 	game_over_music.setVolume(100);
-	fon_music.openFromFile(s_Music);
+	fon_music.openFromFile("music/fon_music.ogg");
 	fon_music.setVolume(100);
 }
 
