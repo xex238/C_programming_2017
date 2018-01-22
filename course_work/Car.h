@@ -40,8 +40,8 @@ public:
 private:
 	Texture texture_cars;
 	Sprite sprite_cars;
-	float x{ 0 }; // <- õ-êîîðäèíàòà ìàøèíêè
-	float y{ 0 }; // <- ó-êîîðäèíàòà ìàøèíêè
+	float x{ 0 }; // <- Ñ…-ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ð° Ð¼Ð°ÑˆÐ¸Ð½ÐºÐ¸
+	float y{ 0 }; // <- Ñƒ-ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ð° Ð¼Ð°ÑˆÐ¸Ð½ÐºÐ¸
 	int vector; // 1 - right, 2 - down, 3 - left, 4 - up
 
 	Texture arrows_texture;
@@ -50,19 +50,19 @@ private:
 	Clock clock;
 	float time;
 
-	float dx_car{ 0 }; // <- õ-êîîðäèíàòà ïðè ïåðåäâèæåíèè ìàøèíêè
-	float dy_car{ 0 }; // <- ó-êîîðäèíàòà ïðè ïåðåäâèæåíèè ìàøèíêè
+	float dx_car{ 0 }; // <- Ñ…-ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ð° Ð¿Ñ€Ð¸ Ð¿ÐµÑ€ÐµÐ´Ð²Ð¸Ð¶ÐµÐ½Ð¸Ð¸ Ð¼Ð°ÑˆÐ¸Ð½ÐºÐ¸
+	float dy_car{ 0 }; // <- Ñƒ-ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ð° Ð¿Ñ€Ð¸ Ð¿ÐµÑ€ÐµÐ´Ð²Ð¸Ð¶ÐµÐ½Ð¸Ð¸ Ð¼Ð°ÑˆÐ¸Ð½ÐºÐ¸
 
 	Sprite* arrows;
-	int capacity_arrows{ 0 };  // <- Ðàçìåð ìàññèâà ñïðàéòîâ
-	int size_arrows{ -1 }; // <- Êîëè÷åñòâî òåêóùèõ çíà÷åíèé â ìàññèâå (êîëè÷åñòâî ñïðàéòîâ)
-	int number_of_move_arrow{ 0 };  // <- Íîìåð òåêóùåãî ïåðåäâèãàåìîãî ñïðàéòà
+	int capacity_arrows{ 0 };  // <- Ð Ð°Ð·Ð¼ÐµÑ€ Ð¼Ð°ÑÑÐ¸Ð²Ð° ÑÐ¿Ñ€Ð°Ð¹Ñ‚Ð¾Ð²
+	int size_arrows{ -1 }; // <- ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ‚ÐµÐºÑƒÑ‰Ð¸Ñ… Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ð¹ Ð² Ð¼Ð°ÑÑÐ¸Ð²Ðµ (ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ¿Ñ€Ð°Ð¹Ñ‚Ð¾Ð²)
+	int number_of_move_arrow{ 0 };  // <- ÐÐ¾Ð¼ÐµÑ€ Ñ‚ÐµÐºÑƒÑ‰ÐµÐ³Ð¾ Ð¿ÐµÑ€ÐµÐ´Ð²Ð¸Ð³Ð°ÐµÐ¼Ð¾Ð³Ð¾ ÑÐ¿Ñ€Ð°Ð¹Ñ‚Ð°
 	String vector_arrows_string{ "" };
 	int vector_of_arrows_int{ 0 };
-	float dx_number_of_arrow{ 0 };  // <- õ-ïîçèöèÿ òåêóùåãî ïåðåäâèãàåìîãî ñïðàéòà
-	float dy_number_of_arrow{ 0 };  // <- ó-ïîçèöèÿ òåêóùåãî ïåðåäâèãàåìîãî ñïðàéòà
-	bool arrow_is_move = false;  // <- Ïåðåäâèãàåì ëè ìû ñïðàéò
-	bool in_this_rectangle_has_arrow = false;  // Åñòü ëè íà ïîçèöèè çàæàòîé ìûøè ñïðàéò
+	float dx_number_of_arrow{ 0 };  // <- Ñ…-Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ Ñ‚ÐµÐºÑƒÑ‰ÐµÐ³Ð¾ Ð¿ÐµÑ€ÐµÐ´Ð²Ð¸Ð³Ð°ÐµÐ¼Ð¾Ð³Ð¾ ÑÐ¿Ñ€Ð°Ð¹Ñ‚Ð°
+	float dy_number_of_arrow{ 0 };  // <- Ñƒ-Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ Ñ‚ÐµÐºÑƒÑ‰ÐµÐ³Ð¾ Ð¿ÐµÑ€ÐµÐ´Ð²Ð¸Ð³Ð°ÐµÐ¼Ð¾Ð³Ð¾ ÑÐ¿Ñ€Ð°Ð¹Ñ‚Ð°
+	bool arrow_is_move = false;  // <- ÐŸÐµÑ€ÐµÐ´Ð²Ð¸Ð³Ð°ÐµÐ¼ Ð»Ð¸ Ð¼Ñ‹ ÑÐ¿Ñ€Ð°Ð¹Ñ‚
+	bool in_this_rectangle_has_arrow = false;  // Ð•ÑÑ‚ÑŒ Ð»Ð¸ Ð½Ð° Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¸ Ð·Ð°Ð¶Ð°Ñ‚Ð¾Ð¹ Ð¼Ñ‹ÑˆÐ¸ ÑÐ¿Ñ€Ð°Ð¹Ñ‚
 
 	Font font_for_text_for_win;
 	Text text_for_win = Text("You are win!!!", font_for_text_for_win, 128);
