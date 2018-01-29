@@ -23,7 +23,7 @@ void Musics::Play_game_over_music()
 	game_over_music.play();
 }
 
-void Musics::Fon_music_set_volume(const float & x)
+void Musics::Fon_music_set_volume(const float& x)
 {
 	fon_music.setVolume(x);
 }
@@ -43,7 +43,7 @@ void Musics::Stop_game_over_music()
 	game_over_music.stop();
 }
 
-void Musics::Game_over_music_set_volume(const float & x)
+void Musics::Game_over_music_set_volume(const float& x)
 {
 	game_over_music.setVolume(x);
 }
