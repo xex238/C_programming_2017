@@ -40,7 +40,7 @@ Menu::Menu()
 	text.setString(txt_1);
 }
 
-void Menu::Menu_MouseButtonReleased_left(RenderWindow & window, Vector2f pos) // <- Если отпущена кнопка в меню
+void Menu::Menu_MouseButtonReleased_left(RenderWindow& window, const Vector2f& pos) // <- Если отпущена кнопка в меню
 {
 	if ((pos.x > 500) && (pos.x < 750) && (pos.y > 130) && (pos.y < 190))
 	{
@@ -57,7 +57,7 @@ void Menu::Menu_MouseButtonReleased_left(RenderWindow & window, Vector2f pos) //
 	enable_rectangle_sprite = false;
 }
 
-void Menu::Menu_MouseButtonPressed_left(const RenderWindow& window, Vector2f pos) // <- Если нажата кнопка в меню
+void Menu::Menu_MouseButtonPressed_left(const RenderWindow& window, const Vector2f& pos) // <- Если нажата кнопка в меню
 {
 	if ((pos.x > 500) && (pos.x < 750) && (pos.y > 130) && (pos.y < 190))
 	{
@@ -83,7 +83,7 @@ void Menu::Menu_MouseButtonPressed_left(const RenderWindow& window, Vector2f pos
 	}
 }
 
-void Menu::Menu_MouseButtonEvent(RenderWindow& window, const Event& event, Vector2f pos) // <- Нажата ли кнопка или отпущена
+void Menu::Menu_MouseButtonEvent(RenderWindow& window, const Event& event, const Vector2f& pos) // <- Нажата ли кнопка или отпущена
 {
 	Menu_MouseButtonPressed_left(window, pos);
 	if ((event.type == Event::MouseButtonReleased) && (event.key.code == Mouse::Left))
@@ -92,7 +92,7 @@ void Menu::Menu_MouseButtonEvent(RenderWindow& window, const Event& event, Vecto
 	}
 }
 
-void Menu::Work_with_settings(const Event& event, Musics& my_music, Vector2f pos) // <- Работа с громкостью звука в настройках
+void Menu::Work_with_settings(const Event& event, Musics& my_music, const Vector2f& pos) // <- Работа с громкостью звука в настройках
 {
 	int text_int_settings[3]{ 0, 0, 0 };
 	std::string txt = "";  // третья цифра тут - первая на консоли // 48 is number 0, 49 is number 1, 53 is number 5
@@ -199,7 +199,7 @@ void Menu::Work_with_settings(const Event& event, Musics& my_music, Vector2f pos
 	}
 }
 
-void Menu::Return_to_main_menu(const Event& event, Vector2f pos)
+void Menu::Return_to_main_menu(const Event& event, const Vector2f& pos)
 {
 	if (event.type == Event::MouseButtonReleased)
 	{
@@ -213,7 +213,7 @@ void Menu::Return_to_main_menu(const Event& event, Vector2f pos)
 	}
 }
 
-void Menu::Restart_level(const Event& event, Car& car, Map& map_1, Musics& my_music, Vector2f pos) // <- Перезагрузка уровня
+void Menu::Restart_level(const Event& event, Car& car, Musics& my_music, const Vector2f& pos) // <- Перезагрузка уровня
 {
 	if (event.type == Event::MouseButtonPressed)
 	{
@@ -221,7 +221,7 @@ void Menu::Restart_level(const Event& event, Car& car, Map& map_1, Musics& my_mu
 		{
 			if ((pos.x > 64) && (pos.x < 96) && (pos.y < 32))
 			{
-				car.Restart_level(map_1, my_music);
+				car.Restart_level(my_music);
 			}
 		}
 	}
