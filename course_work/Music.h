@@ -1,5 +1,6 @@
 #include <SFML\Audio.hpp>
 using namespace sf;
+
 #ifndef Musics_
 #define Musics_
 
@@ -27,8 +28,8 @@ public:
 	void Game_over_music_set_volume(const float& x);
 
 private:
-	Music game_over_music;   // <- this is music for game over
-	Music fon_music;   // <- this is fon music
+	Music game_over_music;   // <- Это музыка будет играть при победе
+	Music fon_music;   // <- Это фоновая музыка
 };
 
 #endif // !Music
