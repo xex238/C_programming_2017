@@ -1,42 +1,37 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
 #include "Car.h"
-#include "Map.h"
 #include "Menu.h"
 #include "Music.h"
-using namespace sf;
+#include "Level.h"
+
 #ifndef Player_
 #define Player_
 
 class Player
 {
 public:
-	Player(const int x);
+	Player();
 
 	~Player() = default;
 
-	void Refresh(RenderWindow& window);
+	void Refresh(const RenderWindow& window);
 
-	void Update_pos(RenderWindow& window);
+	void Update_pos(const RenderWindow& window);
 
 	void Game_event(RenderWindow& window, Event& event);
 
 	void Draw_graphics(RenderWindow& window);
 
 	void Move_car_on_rows();
+private:
+	Level level_1; // <- Переменная уровня
 
+	Menu menu; // <- Переменная меню
 
-	//void Music_on_victory();
-	//protected:
-	Menu menu;
+	Car car; // <- Переменная машинки
 
-	Map map_1;
-
-	Car car = Car(map_1);
-
-	Musics my_music;
-
-	Event event;
+	Musics my_music; // <- Переменная музыки
 
 	Vector2i pixel_pos; // <- Координаты мыши в пикселях
 	Vector2f pos; // <- Координаты мыши
