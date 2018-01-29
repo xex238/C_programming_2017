@@ -1,19 +1,19 @@
 #include <SFML/Graphics.hpp>
 #include <SFML\Audio.hpp>
 #include "Car.h"
-#include "Map.h"
 #include "Menu.h"
 #include "Music.h"
 #include "Player.h"
 using namespace sf;
 
+#include "Level.h"
+#include <vector>
+
 int main()
 {
-	const int x{ 0 };
-
 	RenderWindow window(VideoMode(1366, 768), "New_Window", Style::Fullscreen, ContextSettings());
 
-	Player player(x);
+	Player player;
 
 	Event event;
 
@@ -30,8 +30,7 @@ int main()
 
 		window.clear(Color::Cyan);
 
-		// <- Отрисовка графики
-		player.Draw_graphics(window);
+		player.Draw_graphics(window); // <- Отрисовка графики
 
 		window.display();
 	}
