@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
-#include "Map.h"
 #include "Car.h"
+
 #ifndef Menu_
 #define Menu_
 
@@ -11,17 +11,17 @@ public:
 
 	~Menu() = default;
 
-	void Menu_MouseButtonReleased_left(RenderWindow& window, Vector2f pos);
+	void Menu_MouseButtonReleased_left(RenderWindow& window, const Vector2f& pos);
 
-	void Menu_MouseButtonPressed_left(const RenderWindow& window, Vector2f pos);
+	void Menu_MouseButtonPressed_left(const RenderWindow& window, const Vector2f& pos);
 
-	void Menu_MouseButtonEvent(RenderWindow& window, const Event& event, Vector2f pos);
+	void Menu_MouseButtonEvent(RenderWindow& window, const Event& event, const Vector2f& pos);
 
-	void Work_with_settings(const Event& event, Musics& my_music, Vector2f pos);
+	void Work_with_settings(const Event& event, Musics& my_music, const Vector2f& pos);
 
-	void Return_to_main_menu(const Event& event, Vector2f pos);
+	void Return_to_main_menu(const Event& event, const Vector2f& pos);
 
-	void Restart_level(const Event& event, Car& car, Map&  map_1, Musics& my_music, Vector2f pos);
+	void Restart_level(const Event& event, Car& car, Musics& my_music, const Vector2f& pos);
 
 	Text Return_text();
 
