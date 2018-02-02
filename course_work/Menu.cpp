@@ -1,4 +1,6 @@
 #include "Menu.h"
+#include <iostream>
+#include <sstream>
 
 Menu::Menu()
 {
@@ -18,6 +20,9 @@ Menu::Menu()
 
 	rectangle_texture.loadFromFile("pictures/rectangle.png");
 	rectangle_sprite.setTexture(rectangle_texture);
+
+	level_screen_texture.loadFromFile("maps/Lev.png");
+	level_screen_sprite.setTexture(level_screen_texture);
 
 	sounds_enable_list_texture.loadFromFile("pictures/sprite_list_sign_of_the_volume_1.png");
 	sounds_enable_list_sprite.setTexture(sounds_enable_list_texture);
@@ -42,21 +47,20 @@ Menu::Menu()
 
 void Menu::Menu_MouseButtonReleased_left(RenderWindow& window, const Vector2f& pos) // <- Если отпущена кнопка в меню
 {
-	if ((pos.x > 500) && (pos.x < 750) && (pos.y > 130) && (pos.y < 190))
+	if ((pos.x > 500) && (pos.x < 750) && (pos.y > 130) && (pos.y < 190)) // Если мы нажали кнопку "Играть"
 	{
-		screen_text = "left.png";
+		screen_text = "level_load";
 	}
-	if ((pos.x > 470) && (pos.x < 780) && (pos.y > 340) && (pos.y < 390))
+	if ((pos.x > 470) && (pos.x < 780) && (pos.y > 340) && (pos.y < 390)) // Если мы нажали кнопку "Выйти из игры"
 	{
 		window.close();
 	}
-	if ((pos.x > 510) && (pos.x < 725) && (pos.y > 235) && (pos.y < 290))
+	if ((pos.x > 510) && (pos.x < 725) && (pos.y > 235) && (pos.y < 290)) // Если мы нажали кнопку "Настройки"
 	{
 		screen_text = "settings.png";
 	}
 	enable_rectangle_sprite = false;
 }
-
 void Menu::Menu_MouseButtonPressed_left(const RenderWindow& window, const Vector2f& pos) // <- Если нажата кнопка в меню
 {
 	if ((pos.x > 500) && (pos.x < 750) && (pos.y > 130) && (pos.y < 190))
@@ -82,7 +86,6 @@ void Menu::Menu_MouseButtonPressed_left(const RenderWindow& window, const Vector
 		enable_rectangle_sprite = false;
 	}
 }
-
 void Menu::Menu_MouseButtonEvent(RenderWindow& window, const Event& event, const Vector2f& pos) // <- Нажата ли кнопка или отпущена
 {
 	Menu_MouseButtonPressed_left(window, pos);
@@ -91,16 +94,17 @@ void Menu::Menu_MouseButtonEvent(RenderWindow& window, const Event& event, const
 		Menu_MouseButtonReleased_left(window, pos);
 	}
 }
-
 void Menu::Work_with_settings(const Event& event, Musics& my_music, const Vector2f& pos) // <- Работа с громкостью звука в настройках
 {
-	int text_int_settings[3]{ 0, 0, 0 };
-	std::string txt = "";  // третья цифра тут - первая на консоли // 48 is number 0, 49 is number 1, 53 is number 5
+	int gromkost_int{ 0 }; // <- Величины для перехода от int к string
+	stringstream gromkost_string;
+	string gromkost;
+
 	if (event.type == Event::MouseButtonPressed)
 	{
 		if (event.key.code == Mouse::Left)
 		{
-			if ((pos.x > 950) && (pos.y > 150) && (pos.x < 1080) && (pos.y < 250))
+			if ((pos.x > 950) && (pos.y > 150) && (pos.x < 1080) && (pos.y < 250)) // Включить/выключить звук
 			{
 				if (sounds_enable)
 				{
@@ -119,75 +123,34 @@ void Menu::Work_with_settings(const Event& event, Musics& my_music, const Vector
 					sounds_enable = true;
 				}
 			}
-			if (sound_bufer_volume == 0)
+			if (sounds_enable)
 			{
-				if ((pos.x > 625) && (pos.x < 675) && (pos.y > 185) && (pos.y < 235))
+				if ((pos.x > 625) && (pos.x < 675) && (pos.y > 185) && (pos.y < 235)) // Если прибавляем звук
 				{
-					if ((text_int_real[2] == 0) && (text_int_real[0] == 0))
+					if (my_music.Fon_music_get_volume() < 95)
 					{
-						text_int_real[2] = 5;
-						my_music.Fon_music_set_volume(my_music.Fon_music_get_volume() + 5);
-						my_music.Game_over_music_set_volume(my_music.Fon_music_get_volume() + 5);
-					}
-					else if ((text_int_real[2] == 5) && (text_int_real[1] < 9))
-					{
-						text_int_real[2] = 0;
-						text_int_real[1] = text_int_real[1] + 1;
-						my_music.Fon_music_set_volume(my_music.Fon_music_get_volume() + 5);
-						my_music.Game_over_music_set_volume(my_music.Fon_music_get_volume() + 5);
-					}
-					else if ((text_int_real[2] == 5) && (text_int_real[1] == 9))
-					{
-						text_int_real[0] = 1;
-						text_int_real[1] = 0;
-						text_int_real[2] = 0;
-						my_music.Fon_music_set_volume(my_music.Fon_music_get_volume() + 5);
-						my_music.Game_over_music_set_volume(my_music.Fon_music_get_volume() + 5);
+						my_music.Fon_music_set_volume((int)((int)(my_music.Fon_music_get_volume() + 0.5) + 5)); // Увеличиваем громкость звука на 5
+						gromkost_int = my_music.Fon_music_get_volume(); // Получение громкости звука
+						gromkost_string << gromkost_int;
+						gromkost = gromkost_string.str();
+						text.setString(gromkost);
 					}
 				}
-				if ((pos.x > 835) && (pos.x < 885) && (pos.y > 185) && (pos.y < 235))
+				if ((pos.x > 835) && (pos.x < 885) && (pos.y > 185) && (pos.y < 235)) // Если убавляем звук
 				{
-					if ((text_int_real[2] == 5) && (text_int_real[1] > 0))
+					if (my_music.Fon_music_get_volume() > 5)
 					{
-						text_int_real[2] = text_int_real[2] - 5;
-						my_music.Fon_music_set_volume(my_music.Fon_music_get_volume() - 5);
-						my_music.Game_over_music_set_volume(my_music.Fon_music_get_volume() - 5);
-					}
-					else if ((text_int_real[2] == 0) && (text_int_real[1] > 0))
-					{
-						text_int_real[2] = 5;
-						text_int_real[1] = text_int_real[1] - 1;
-						my_music.Fon_music_set_volume(my_music.Fon_music_get_volume() - 5);
-						my_music.Game_over_music_set_volume(my_music.Fon_music_get_volume() - 5);
-					}
-					else if ((text_int_real[1] == 0) && (text_int_real[0] == 1))
-					{
-						text_int_real[0] = 0;
-						text_int_real[1] = 9;
-						text_int_real[2] = 5;
-						my_music.Fon_music_set_volume(my_music.Fon_music_get_volume() - 5);
-						my_music.Game_over_music_set_volume(my_music.Fon_music_get_volume() - 5);
+						my_music.Fon_music_set_volume((int)((int)(my_music.Fon_music_get_volume() + 0.5) - 5)); // Уменьшаем громкость звука на 5
+						gromkost_int = my_music.Fon_music_get_volume(); // Получение громкости звука
+						gromkost_string << gromkost_int;
+						gromkost = gromkost_string.str();
+						text.setString(gromkost);
 					}
 				}
-				if (text_int_real[0] == 0)
-					for (int i = 1; i < 3; i++)
-					{
-						text_int_settings[i] = text_int_real[i] + 48;
-						txt += text_int_settings[i];
-					}
-				else
-				{
-					for (int i = 0; i < 3; i++)
-					{
-						text_int_settings[i] = text_int_real[i] + 48;
-						txt += text_int_settings[i];
-					}
-				}
-				text.setString(txt);
 			}
 		}
 	}
-	if (event.type == Event::MouseButtonReleased)
+	if (event.type == Event::MouseButtonReleased) // Если нажата кнопка "назад"
 	{
 		if (event.key.code == Mouse::Left)
 		{
@@ -198,8 +161,7 @@ void Menu::Work_with_settings(const Event& event, Musics& my_music, const Vector
 		}
 	}
 }
-
-void Menu::Return_to_main_menu(const Event& event, const Vector2f& pos)
+void Menu::Return_to_main_menu(const Event& event, const Vector2f& pos, Car& car, Level& level, Musics& my_music) // Вернуться из игры к выбору уровней
 {
 	if (event.type == Event::MouseButtonReleased)
 	{
@@ -207,12 +169,19 @@ void Menu::Return_to_main_menu(const Event& event, const Vector2f& pos)
 		{
 			if ((pos.x < 32) && (pos.y < 32))
 			{
-				screen_text = "main.png";
+				screen_text = "level_load";
+				car.Set_enable_text_for_win(false);
+				if (play_game_over_music)
+				{
+					my_music.Stop_game_over_music();
+					my_music.Play_fon_music();
+				}
+				//car.~Car(); // Очистить память, связанную с машинкой
+				//level_1.~Level(); // Очистить память, связанную с уровнем
 			}
 		}
 	}
 }
-
 void Menu::Restart_level(const Event& event, Car& car, Musics& my_music, const Vector2f& pos) // <- Перезагрузка уровня
 {
 	if (event.type == Event::MouseButtonPressed)
@@ -225,6 +194,19 @@ void Menu::Restart_level(const Event& event, Car& car, Musics& my_music, const V
 			}
 		}
 	}
+} 
+void Menu::Set_screen_text(const String& screen_text_)
+{
+	screen_text = screen_text_;
+}
+void Menu::Set_play_game_over_music(const bool& boolean)
+{
+	play_game_over_music = boolean;
+}
+
+bool Menu::Return_enable_rectangle_sprite()
+{
+	return enable_rectangle_sprite;
 }
 
 Text Menu::Return_text()
@@ -241,33 +223,27 @@ Sprite Menu::Return_sounds_enable_list_sprite()
 {
 	return sounds_enable_list_sprite;
 }
-
 Sprite Menu::Return_main_sprite()
 {
 	return main_sprite;
 }
-
 Sprite Menu::Return_left_sprite()
 {
 	return left_sprite;
 }
-
 Sprite Menu::Return_settings_sprite()
 {
 	return settings_sprite;
 }
-
 Sprite Menu::Return_rectangle_sprite()
 {
 	return rectangle_sprite;
 }
-
 Sprite Menu::Return_restart_level_sprite()
 {
 	return restart_level_sprite;
 }
-
-bool Menu::Return_enable_rectangle_sprite()
+Sprite Menu::Return_level_screen_sprite()
 {
-	return enable_rectangle_sprite;
+	return level_screen_sprite;
 }
