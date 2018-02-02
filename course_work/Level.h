@@ -12,41 +12,47 @@ using namespace sf;
 
 struct Object
 {
-	int GetPropertyInt(const string& name); // номер свойства объекта в нашем списке
+	int GetPropertyInt(const string& name); // <- РќРѕРјРµСЂ СЃРІРѕР№СЃС‚РІР° РѕР±СЉРµРєС‚Р° РІ РЅР°С€РµРј СЃРїРёСЃРєРµ
 	float GetPropertyFloat(const string& name);
 	string GetPropertyString(const string& name);
 
-	string name; // объявили переменную name типа string
-	string type; // а здесь переменную type типа string
-	Rect<float> rect; // тип Rect с нецелыми значениями
-	map<string, string> properties; // создаём ассоциатиный массив. ключ - строковый тип, значение - строковый
+	string name; // <- РћР±СЉСЏРІРёР»Рё РїРµСЂРµРјРµРЅРЅСѓСЋ name С‚РёРїР° string
+	string type; // <- РћР±СЉСЏРІРёР»Рё РїРµСЂРµРјРµРЅРЅСѓСЋ type С‚РёРїР° string
+	Rect<float> rect; // <- РўРёРї Rect СЃ РЅРµС†РµР»С‹РјРё Р·РЅР°С‡РµРЅРёСЏРјРё
+	map<string, string> properties; // <- РЎРѕР·РґР°С‘Рј Р°СЃСЃРѕС†РёР°С‚РёРЅС‹Р№ РјР°СЃСЃРёРІ. РєР»СЋС‡ - СЃС‚СЂРѕРєРѕРІС‹Р№ С‚РёРї, Р·РЅР°С‡РµРЅРёРµ - СЃС‚СЂРѕРєРѕРІС‹Р№
 
-	Sprite sprite; // объявили спрайт
+	Sprite sprite; // <- РћР±СЉСЏРІРёР»Рё СЃРїСЂР°Р№С‚
 };
 
-struct Layer // слои
+struct Layer // <- РЎР»РѕРё
 {
-	int opacity; // непрозрачность слоя
-	vector<Sprite> tiles; // закидываем в вектор тайлы
+	int opacity; // <- РќРµРїСЂРѕР·СЂР°С‡РЅРѕСЃС‚СЊ СЃР»РѕСЏ
+	vector<Sprite> tiles; // <- Р—Р°РєРёРґС‹РІР°РµРј РІ РІРµРєС‚РѕСЂ С‚Р°Р№Р»С‹
 };
 
-class Level // главный класс - уровень
+class Level // <- Р“Р»Р°РІРЅС‹Р№ РєР»Р°СЃСЃ - СѓСЂРѕРІРµРЅСЊ
 {
 public:
-	bool LoadFromFile(const string& filename); // возвращает false если не получилось загрузить
-	Object GetObject(const string& name);
-	vector<Object> GetObjects(const string& name); // выдаем объект в наш уровень
-	vector<Object> GetAllObjects(); // выдаем все объекты в наш уровень
-	void Draw(RenderWindow& window); // рисуем в окно
+	~Level() = default;
+
+	void Draw(RenderWindow& window); // <- Р РёСЃСѓРµРј РІ РѕРєРЅРѕ
 	void Dislocate(const int& w, const int& h);
 	void Dislocate_objects(const int& w, const int& h);
-	Vector2i GetTileSize(); // получаем размер тайла
+
+	bool LoadFromFile(const string& filename); // <- Р’РѕР·РІСЂР°С‰Р°РµС‚ false РµСЃР»Рё РЅРµ РїРѕР»СѓС‡РёР»РѕСЃСЊ Р·Р°РіСЂСѓР·РёС‚СЊ
+
+	Object GetObject(const string& name);
+
+	vector<Object> GetObjects(const string& name); // <- Р’С‹РґР°РµРј РѕР±СЉРµРєС‚ РІ РЅР°С€ СѓСЂРѕРІРµРЅСЊ
+	vector<Object> GetAllObjects(); // <- Р’С‹РґР°РµРј РІСЃРµ РѕР±СЉРµРєС‚С‹ РІ РЅР°С€ СѓСЂРѕРІРµРЅСЊ
+
+	Vector2i GetTileSize(); // РџРѕР»СѓС‡Р°РµРј СЂР°Р·РјРµСЂ С‚Р°Р№Р»Р°
 private:
-	int width, height, tileWidth, tileHeight; // в tmx файле width height в начале,затем размер тайла
-	int firstTileID; // получаем айди первого тайла
-	Rect<float> drawingBounds; // размер части карты которую рисуем
-	Texture tilesetImage; // текстура карты
-	vector<Object> objects; // массив типа Объекты, который мы создали
+	int width, height, tileWidth, tileHeight; // <- Р’ tmx С„Р°Р№Р»Рµ, width, height РІ РЅР°С‡Р°Р»Рµ, Р·Р°С‚РµРј СЂР°Р·РјРµСЂ С‚Р°Р№Р»Р°
+	int firstTileID; // <- РџРѕР»СѓС‡Р°РµРј ID РїРµСЂРІРѕРіРѕ С‚Р°Р№Р»Р°
+	Rect<float> drawingBounds; // <- Р Р°Р·РјРµСЂ С‡Р°СЃС‚Рё РєР°СЂС‚С‹ РєРѕС‚РѕСЂСѓСЋ СЂРёСЃСѓРµРј
+	Texture tilesetImage; // <- РўРµРєСЃС‚СѓСЂР° РєР°СЂС‚С‹
+	vector<Object> objects; // <- РњР°СЃСЃРёРІ С‚РёРїР° Object, РєРѕС‚РѕСЂС‹Р№ РјС‹ СЃРѕР·РґР°Р»Рё
 	vector<Layer> layers;
 };
 
