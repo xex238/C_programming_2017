@@ -19,145 +19,70 @@ void Car::Load_car(Level& lev) // <- Стандартный конструкто
 {
 	obj = lev.GetAllObjects(); // <- Делаем копию объектов карты
 	vector_of_right_direction = obj; // <- Делаем вторую копию объектов карты
+	burn = lev.GetObject("burn"); // <- Объекту burn присваеваем одноимённый объект
+	exit = lev.GetObject("exit"); // <- Объекту exit присваеваем одноимённый объект
 
 	for (int i = 0; i < obj.size(); i++)
 	{
 		if (obj[i].name == "plate")
 		{
 			obj[i].type = "-1";
+			capacity_arrows++; // Считаем количество табличек
 		}
 	}
 
-	burn = lev.GetObject("burn"); // <- Объекту burn присваеваем одноимённый объект
-	x = burn.rect.left + 5;
-	y = burn.rect.top + 5;
 	burn_vector = atoi(burn.type.c_str()); // <- Присваеваем вектор "рождения"
 	vector = burn_vector;
-
+	if ((vector == 1) || (vector == 3))
+	{
+		x = burn.rect.left + 1;
+		y = burn.rect.top + 7;
+	}
+	if ((vector == 2) || (vector == 4))
+	{
+		x = burn.rect.left + 7;
+		y = burn.rect.top + 1;
+	}
 	sprite_cars.setPosition(x, y);
 
-	exit = lev.GetObject("exit"); // <- Объекту exit присваеваем одноимённый объект
-
-	for (int i = 0; i < obj.size(); i++) // Считаем количество табличек
-	{
-		if (obj[i].name == "plate")
-		{
-			capacity_arrows++;
-		}
-	}
 	Pick_texture_for_car();
 	arrows = new Sprite[capacity_arrows + 1];
 }
-
-void Car::Move_control(const Vector2f& pos) // <- Выбор движения машинки или обработка передвижения стрелочки
+void Car::Go_without_time() // Обработка движений машинки к финишу
 {
-	if (arrow_is_move)
-	{
-		arrows[number_of_move_arrow].setPosition(pos.x - dx_number_of_arrow, pos.y - dy_number_of_arrow);
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Right))
-	{
-		sprite_cars.setTextureRect(IntRect(0, 34, 40, 22));
-		sprite_cars.move(0.1 * time, 0);
-		x += 0.1 * time;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Down))
-	{
-		sprite_cars.setTextureRect(IntRect(0, 0, 22, 36));
-		sprite_cars.move(0, 0.1 * time);
-		y += 0.1 * time;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Left))
-	{
-		sprite_cars.setTextureRect(IntRect(20, 0, 38, 24));
-		sprite_cars.move(-0.1 * time, 0);
-		x += -0.1 * time;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Up))
-	{
-		sprite_cars.setTextureRect(IntRect(56, 0, 22, 40));
-		sprite_cars.move(0, -0.1 * time);
-		y += -0.1 * time;
-	}
-}
-
-void Car::Go_without_time(const int& vector/*, RenderWindow& window*/)
-{
-	this->vector = vector;
+	float w = 0.32;
 	switch (vector)
 	{
 	case (1):
 	{
 		sprite_cars.setTextureRect(IntRect(0, 34, 40, 22));
-		sprite_cars.move(0.1, 0);
-		x += 0.1;
+		sprite_cars.move(w, 0);
+		x += w;
 		break;
 	}
 	case (2):
 	{
 		sprite_cars.setTextureRect(IntRect(0, 0, 22, 36));
-		sprite_cars.move(0, 0.1);
-		y += 0.1;
+		sprite_cars.move(0, w);
+		y += w;
 		break;
 	}
 	case (3):
 	{
 		sprite_cars.setTextureRect(IntRect(20, 0, 38, 24));
-		sprite_cars.move(-0.1, 0);
-		x += -0.1;
+		sprite_cars.move(-w, 0);
+		x += -w;
 		break;
 	}
 	case(4):
 	{
 		sprite_cars.setTextureRect(IntRect(56, 0, 22, 40));
-		sprite_cars.move(0, -0.1);
-		y += -0.1;
-		break;
-	}
-	//default:
-	//{
-	//	window.draw(sprite_cars);
-	//	break;
-	//}
-	}
-}
-
-void Car::Go_with_time(const int& vector)
-{
-	this->vector = vector;
-	switch (vector)
-	{
-	case (1):
-	{
-		sprite_cars.setTextureRect(IntRect(0, 34, 40, 22));
-		sprite_cars.move(0.1 * time, 0);
-		x += 0.1 * time;
-		break;
-	}
-	case (2):
-	{
-		sprite_cars.setTextureRect(IntRect(0, 0, 22, 36));
-		sprite_cars.move(0, 0.1 * time);
-		y += 0.1 * time;
-		break;
-	}
-	case (3):
-	{
-		sprite_cars.setTextureRect(IntRect(20, 0, 38, 24));
-		sprite_cars.move(-0.1 * time, 0);
-		x += -0.1 * time;
-		break;
-	}
-	case(4):
-	{
-		sprite_cars.setTextureRect(IntRect(56, 0, 22, 40));
-		sprite_cars.move(0, -0.1 * time);
-		y += -0.1 * time;
+		sprite_cars.move(0, -w);
+		y += -w;
 		break;
 	}
 	}
 }
-
 void Car::Player_MouseButtonPressed(const Event& event, const Vector2f& pos) // <- Обработка передвижения стрелочки
 {
 	if (event.type == Event::MouseButtonPressed)
@@ -171,43 +96,19 @@ void Car::Player_MouseButtonPressed(const Event& event, const Vector2f& pos) // 
 			}
 			else if ((!arrow_is_move) && (pos.x > 320) && (pos.y > 64) && (pos.x < 352) && (pos.y < 96)) // <- Если на исходных 4-ёх стрелочках
 			{
-				vector_arrows_string = '1';
-				size_arrows++;
-				number_of_move_arrow = size_arrows;
-				arrows[number_of_move_arrow].setTexture(arrows_texture);
-				arrows[number_of_move_arrow].setTextureRect(IntRect(32, 0, 32, 32));
-				arrows[number_of_move_arrow].setPosition(320, 64);
-				arrow_is_move = true;
+				Choose_arrow("1", 32, 0);
 			}
 			else if ((!arrow_is_move) && (pos.x > 384) && (pos.y > 64) && (pos.x < 416) && (pos.y < 96))
 			{
-				vector_arrows_string = '2';
-				size_arrows++;
-				number_of_move_arrow = size_arrows;
-				arrows[number_of_move_arrow].setTexture(arrows_texture);
-				arrows[number_of_move_arrow].setTextureRect(IntRect(32, 32, 32, 32));
-				arrows[number_of_move_arrow].setPosition(384, 64);
-				arrow_is_move = true;
+				Choose_arrow("2", 32, 32);
 			}
 			else if ((!arrow_is_move) && (pos.x > 448) && (pos.y > 64) && (pos.x < 480) && (pos.y < 96))
 			{
-				vector_arrows_string = '3';
-				size_arrows++;
-				number_of_move_arrow = size_arrows;
-				arrows[number_of_move_arrow].setTexture(arrows_texture);
-				arrows[number_of_move_arrow].setTextureRect(IntRect(0, 32, 32, 32));
-				arrows[number_of_move_arrow].setPosition(448, 64);
-				arrow_is_move = true;
+				Choose_arrow("3", 0, 32);
 			}
 			else if ((!arrow_is_move) && (pos.x > 512) && (pos.y > 64) && (pos.x < 544) && (pos.y < 96))
 			{
-				vector_arrows_string = '4';
-				size_arrows++;
-				number_of_move_arrow = size_arrows;
-				arrows[number_of_move_arrow].setTexture(arrows_texture);
-				arrows[number_of_move_arrow].setTextureRect(IntRect(0, 0, 32, 32));
-				arrows[number_of_move_arrow].setPosition(512, 64);
-				arrow_is_move = true;
+				Choose_arrow("4", 0, 0);
 			}
 			else if (!arrow_is_move) // <- Если указатель мыши на созданных стрелочках
 			{
@@ -225,7 +126,6 @@ void Car::Player_MouseButtonPressed(const Event& event, const Vector2f& pos) // 
 		}
 	}
 }
-
 void Car::Player_MouseButtonReleased(const Event& event, const Vector2f& pos) // <- После отпускания кнопки мыши, которая тащила стрелочку
 {
 	if (event.type == Event::MouseButtonReleased)
@@ -252,25 +152,22 @@ void Car::Player_MouseButtonReleased(const Event& event, const Vector2f& pos) //
 		}
 	}
 }
-
 void Car::Restart_time() // <- Обновление времени
 {
 	time = clock.getElapsedTime().asMicroseconds();
 	clock.restart();
 	time = time / 800;
 }
-
-void Car::Draw_additional_arrows(RenderWindow& window) // <- Отрисовка стрелочек
+void Car::Draw_additional_arrows(RenderWindow& window) // <- Отрисовка дополнительных стрелочек
 {
 	for (int i = 0; i < size_arrows + 1; i++)
 	{
 		window.draw(arrows[i]);
 	}
 }
-
-void Car::Draw_arrows(RenderWindow& window)
+void Car::Draw_arrows(RenderWindow& window) // <- Загрузка текстур значков
 {
-	arrows_sprite.setTextureRect(IntRect(32, 0, 32, 32));  // <- Загрузка текстур значков
+	arrows_sprite.setTextureRect(IntRect(32, 0, 32, 32));
 	arrows_sprite.setPosition(320, 64);
 	window.draw(arrows_sprite);
 	
@@ -286,44 +183,7 @@ void Car::Draw_arrows(RenderWindow& window)
 	arrows_sprite.setPosition(512, 64);
 	window.draw(arrows_sprite);
 }
-
-void Car::Car_go(/*RenderWindow& window, */Musics& my_music) // <- Автоматическое движение машинки к финишу
-{
-	while (!(Check_collision_with_exit_for_car_go(x, y))) // Пока не дошли до выхода
-	{
-		// Пока не дошли до таблички и не дошли до выхода, идём вперёд по вектору
-		while ((!Check_collision_with_arrows_for_car_go(x, y)) && (!Check_collision_with_exit_for_car_go(x, y)))
-		{
-			Go_without_time(vector/*, window*/);
-		}
-		// Если мы стоим на табличке и не стоим на выходе, то идём, пока не "не кончится" табличка
-		if ((Check_on_true_vector(x, y)) && (!Check_collision_with_exit_for_car_go(x, y)))
-		{
-			while (Check_collision_with_arrows_for_car_go(x, y))
-			{
-				Go_without_time(vector/*, window*/);
-			}
-		}
-		else
-		{
-			break;
-		}
-	}
-	if (Check_collision_with_exit_for_car_go(x, y))
-	{
-		std::cout << "Yslovie vipolneno" << std::endl;
-		my_music.Stop_fon_music();
-		my_music.Play_game_over_music();
-		enable_text_for_win = true;
-	}
-}
-
-Sprite Car::Return_sprite_cars()
-{
-	return sprite_cars;
-}
-
-void Car::Restart_level(Musics& my_music)
+void Car::Restart_level(Musics& my_music) // Перезапуск уровня
 {
 	for (int i = 0; i < obj.size(); i++)
 	{
@@ -333,20 +193,119 @@ void Car::Restart_level(Musics& my_music)
 		}
 	}
 	size_arrows = -1;
-	x = burn.rect.left + 5;
-	y = burn.rect.top + 5;
 	burn_vector = atoi(burn.type.c_str());
 	vector = burn_vector;
+	if ((vector == 1) || (vector == 3))
+	{
+		x = burn.rect.left + 1;
+		y = burn.rect.top + 7;
+	}
+	if ((vector == 2) || (vector == 4))
+	{
+		x = burn.rect.left + 7;
+		y = burn.rect.top + 1;
+	}
 	Pick_texture_for_car();
 	sprite_cars.setPosition(x, y);
 	my_music.Stop_game_over_music();
 	my_music.Play_fon_music();
 	enable_text_for_win = false;
 }
+void Car::Pick_texture_for_car()
+{
+	switch (vector)
+	{
+	case (1):
+	{
+		sprite_cars.setTextureRect(IntRect(0, 36, 33, 17));
+		break;
+	}
+	case (2):
+	{
+		sprite_cars.setTextureRect(IntRect(3, 0, 17, 33));
+		break;
+	}
+	case (3):
+	{
+		sprite_cars.setTextureRect(IntRect(23, 3, 33, 17));
+		break;
+	}
+	case(4):
+	{
+		sprite_cars.setTextureRect(IntRect(59, 0, 17, 33));
+		break;
+	}
+	}
+}
+void Car::Set_enable_text_for_win(const bool& boolean)
+{
+	enable_text_for_win = boolean;
+}
+void Car::Choose_arrow(const string& number, const int& x_, const int& y_)
+{
+	vector_arrows_string = number;
+	size_arrows++;
+	number_of_move_arrow = size_arrows;
+	arrows[number_of_move_arrow].setTexture(arrows_texture);
+	arrows[number_of_move_arrow].setTextureRect(IntRect(x_, y_, 32, 32));
+	arrows[number_of_move_arrow].setPosition(320 + ((atoi(number.c_str()) - 1) * 64), 64);
+	arrow_is_move = true;
+}
+void Car::Move_arrow(const Vector2f& pos)
+{
+	if (arrow_is_move)
+	{
+		arrows[number_of_move_arrow].setPosition(pos.x - dx_number_of_arrow, pos.y - dy_number_of_arrow);
+	}
+}
 
 bool Car::Return_enable_text_for_win()
 {
 	return enable_text_for_win;
+}
+bool Car::Check_collision_with_arrows_for_car_go() // Проверка столкновений с табличками
+{
+	for (int i = 0; i < obj.size(); i++)
+	{
+		if (obj[i].name == "plate")
+		{
+			if ((obj[i].rect.left < x) && (obj[i].rect.left + obj[i].rect.width > x) && (obj[i].rect.top < y) && (obj[i].rect.top + obj[i].rect.height > y))
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+bool Car::Check_collision_with_exit_for_car_go() // Проверка столкновения с выходом
+{
+	if ((exit.rect.left < x) && (exit.rect.left + exit.rect.width > x) && (exit.rect.top < y) && (exit.rect.top + exit.rect.height > y))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+bool Car::Check_on_true_vector() // Проверка на правильность выбранного напрапвления машинки на повороте
+{
+	for (int i = 0; i < obj.size(); i++)
+	{
+		if (obj[i].name == "plate")
+		{
+			if ((obj[i].rect.left < x) && (obj[i].rect.left + obj[i].rect.width > x) && (obj[i].rect.top < y) && (obj[i].rect.top + obj[i].rect.height > y))
+			{
+				if (obj[i].type == vector_of_right_direction[i].type)
+				{
+					vector = atoi(obj[i].type.c_str());
+					return true;
+				}
+				else
+					return false;
+			}
+		}
+	}
 }
 
 Text Car::Return_text_for_win()
@@ -373,76 +332,7 @@ String Car::Check_collision_with_plate(const Vector2f& pos, const String& new_ob
 	return obj_type;
 }
 
-bool Car::Check_collision_with_arrows_for_car_go(const float& x_, const float& y_)
+Sprite Car::Return_sprite_cars()
 {
-	for (int i = 0; i < obj.size(); i++)
-	{
-		if (obj[i].name == "plate")
-		{
-			if ((obj[i].rect.left < x_) && (obj[i].rect.left + obj[i].rect.width > x_) && (obj[i].rect.top < y_) && (obj[i].rect.top + obj[i].rect.height > y_))
-			{
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
-bool Car::Check_collision_with_exit_for_car_go(const float& x_, const float& y_)
-{
-	if ((exit.rect.left < x_) && (exit.rect.left + exit.rect.width > x_) && (exit.rect.top < y_) && (exit.rect.top + exit.rect.height > y_))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-bool Car::Check_on_true_vector(const float & x_, const float & y_)
-{
-	for (int i = 0; i < obj.size(); i++)
-	{
-		if (obj[i].name == "plate")
-		{
-			if ((obj[i].rect.left < x_) && (obj[i].rect.left + obj[i].rect.width > x_) && (obj[i].rect.top < y_) && (obj[i].rect.top + obj[i].rect.height > y_))
-			{
-				if (obj[i].type == vector_of_right_direction[i].type)
-				{
-					vector = atoi(obj[i].type.c_str());
-					return true;
-				}
-				else
-					return false;
-			}
-		}
-	}
-}
-
-void Car::Pick_texture_for_car()
-{
-	switch (vector)
-	{
-	case (1):
-	{
-		sprite_cars.setTextureRect(IntRect(0, 34, 40, 22));
-		break;
-	}
-	case (2):
-	{
-		sprite_cars.setTextureRect(IntRect(0, 0, 22, 36));
-		break;
-	}
-	case (3):
-	{
-		sprite_cars.setTextureRect(IntRect(20, 0, 38, 24));
-		break;
-	}
-	case(4):
-	{
-		sprite_cars.setTextureRect(IntRect(56, 0, 22, 40));
-		break;
-	}
-	}
+	return sprite_cars;
 }
