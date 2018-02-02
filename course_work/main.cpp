@@ -11,7 +11,7 @@ using namespace sf;
 
 int main()
 {
-	RenderWindow window(VideoMode(1366, 768), "New_Window", Style::Fullscreen, ContextSettings());
+	RenderWindow window(VideoMode(1366, 768), "Fast racing", Style::Fullscreen, ContextSettings());
 
 	Player player;
 
@@ -19,19 +19,13 @@ int main()
 
 	while (window.isOpen())
 	{
-		player.Refresh(window);
+		player.Refresh(window); // Обновление позиции мыши на экране
 
 		while (window.pollEvent(event)) // <- Обработчик событий
 		{
 			player.Game_event(window, event);
 		}
 
-		player.Move_car_on_rows();
-
-		window.clear(Color::Cyan);
-
 		player.Draw_graphics(window); // <- Отрисовка графики
-
-		window.display();
 	}
 }
